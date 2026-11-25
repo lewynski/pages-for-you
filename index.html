@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZHIA.OS ♥ Pages For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-sakura">
+  <!-- Boot Splash Screen -->
+  <div id="boot-screen" class="boot-screen" role="dialog" aria-label="Booting ZHIA.OS">
+    <div class="boot-card pixel-box">
+      <div class="boot-heart" aria-hidden="true">♥</div>
+      <h1 class="boot-title">ZHIA.OS</h1>
+      <p class="boot-subtitle">pages-for-you // v1.4</p>
+      <div class="boot-progress-track">
+        <div id="boot-progress-bar" class="boot-progress-bar"></div>
+      </div>
+      <p id="boot-status" class="boot-status">Waking up Mochi &amp; Boba...</p>
+      <button id="boot-enter-btn" class="pixel-btn pixel-btn-primary boot-enter-btn" type="button">
+        ♥ ENTER WORKSPACE ♥
+      </button>
+    </div>
+  </div>
+
+  <!-- Animated Background Canvas (Sakura petals, pixel stars, sparkles) -->
+  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Main Pixel Desktop Workspace -->
+  <main id="desktop" class="desktop" aria-label="Pixel Pink Workspace">
+    <!-- Left Column: Desktop App Icons -->
+    <nav class="desktop-icons" aria-label="Workspace Applications">
+      <button class="desktop-icon" data-app="quotes" type="button">
+        <span class="icon-art icon-quotes" aria-hidden="true"></span>
+        <span class="icon-label">Quote Jar</span>
+      </button>
+
+      <button class="desktop-icon" data-app="pets" type="button">
+        <span class="icon-art icon-pets" aria-hidden="true"></span>
+        <span class="icon-label">Pet Corner</span>
+      </button>
+
+      <button class="desktop-icon" data-app="diary" type="button">
+        <span class="icon-art icon-diary" aria-hidden="true"></span>
+        <span class="icon-label">Secret Diary</span>
+      </button>
+
+      <button class="desktop-icon" data-app="melody" type="button">
+        <span class="icon-art icon-melody" aria-hidden="true"></span>
+        <span class="icon-label">Melody Box</span>
+      </button>
+
+      <button class="desktop-icon" data-app="clues" type="button">
+        <span class="icon-art icon-clues" aria-hidden="true"></span>
+        <span class="icon-label">Clue Log</span>
+      </button>
+
+      <button class="desktop-icon desktop-icon-secret" data-app="vault" type="button" id="vault-desktop-icon">
+        <span class="icon-art icon-vault" aria-hidden="true"></span>
+        <span class="icon-label">For Zhia 🔒</span>
+      </button>
+    </nav>
+
+    <!-- Right Column: Cozy Desktop Widgets -->
+    <aside class="desktop-widgets" aria-label="Desktop Widgets">
+      <!-- Clue Tracker Widget -->
+      <section class="widget pixel-box widget-quest">
+        <div class="widget-header">
+          <span>★ SECRET QUEST</span>
+          <span id="widget-clue-count">0/4</span>
+        </div>
+        <div class="widget-body">
+          <p class="widget-text">Find all 4 hidden clues in this workspace to unlock <strong>For Zhia</strong>!</p>
+          <div class="seal-slots" id="widget-seal-slots">
+            <div class="seal-slot" data-slot="1" title="Clue #1">?</div>
+            <div class="seal-slot" data-slot="2" title="Clue #2">?</div>
+            <div class="seal-slot" data-slot="3" title="Clue #3">?</div>
+            <div class="seal-slot" data-slot="4" title="Clue #4">?</div>
+          </div>
+          <button class="pixel-btn pixel-btn-sm widget-open-vault" data-app="vault" type="button">
+            Open Secret Vault
+          </button>
+        </div>
+      </section>
+
+      <!-- Sticky Note Widget -->
+      <section class="widget sticky-note" id="sticky-note" tabindex="0" role="button" aria-label="Read sticky note">
+        <div class="sticky-pin" aria-hidden="true">♥</div>
+        <p class="sticky-title">Note for Zhia:</p>
+        <p class="sticky-body" id="sticky-body">
+          Welcome to your cozy pink pixel workspace! Explore the apps, pet the little friends below, and collect 4 secret clues~
+        </p>
+        <span class="sticky-hint">click to flip note ↻</span>
+      </section>
+
+      <!-- Interactive Pixel Plant Widget -->
+      <section class="widget pixel-box widget-plant">
+        <div class="widget-header">
+          <span>✿ SAKURA SPROUT</span>
+          <span id="plant-stage-label">Lv.1</span>
+        </div>
+        <div class="widget-body plant-body">
+          <div id="pixel-plant-art" class="pixel-plant-art" aria-hidden="true"></div>
+          <p id="plant-quote" class="plant-quote">Water me for a sweet secret!</p>
+          <button id="water-plant-btn" class="pixel-btn pixel-btn-sm" type="button">💧 Water</button>
+        </div>
+      </section>
+    </aside>
+
+    <!-- Draggable Windows Container -->
+    <div id="windows-layer" class="windows-layer"></div>
+
+    <!-- Roaming Interactive Pixel Pets Layer -->
+    <div id="pets-layer" class="pets-layer" aria-label="Interactive Desktop Pets"></div>
+
+    <!-- Floating Toast Notifications (Clue Unlocked / Secret Quote) -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+  </main>
+
+  <!-- Start Menu Popup -->
+  <div id="start-menu" class="start-menu pixel-box hidden" role="menu">
+    <div class="start-menu-header">♥ ZHIA.OS MENU</div>
+    <div class="start-menu-section">
+      <div class="start-menu-label">Apps</div>
+      <button class="start-item" data-app="quotes" type="button">🎀 Quote Jar</button>
+      <button class="start-item" data-app="pets" type="button">🐾 Pet Corner</button>
+      <button class="start-item" data-app="diary" type="button">📖 Secret Diary</button>
+      <button class="start-item" data-app="melody" type="button">🎵 Melody Box</button>
+      <button class="start-item" data-app="clues" type="button">🔎 Clue Log</button>
+      <button class="start-item start-item-secret" data-app="vault" type="button">🔒 For Zhia</button>
+    </div>
+    <div class="start-menu-section">
+      <div class="start-menu-label">Pink Theme</div>
+      <div class="theme-pills">
+        <button class="pixel-btn pixel-btn-xs theme-btn active" data-theme="theme-sakura" type="button">Sakura</button>
+        <button class="pixel-btn pixel-btn-xs theme-btn" data-theme="theme-milk" type="button">Berry Milk</button>
+        <button class="pixel-btn pixel-btn-xs theme-btn" data-theme="theme-night" type="button">Starry Pink</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Pixel Taskbar -->
+  <footer class="taskbar" role="contentinfo">
+    <div class="taskbar-left">
+      <button id="start-btn" class="pixel-btn taskbar-start" type="button" aria-expanded="false">
+        <span class="heart-beat">♥</span> START
+      </button>
+      <div id="taskbar-windows" class="taskbar-windows"></div>
+    </div>
+
+    <div class="taskbar-right">
+      <button id="quick-treat-btn" class="pixel-btn pixel-btn-xs taskbar-tool" type="button" title="Drop a strawberry treat for the desktop pets!">
+        🍓 Treat
+      </button>
+      <button id="bgm-toggle-btn" class="pixel-btn pixel-btn-xs taskbar-tool" type="button" title="Toggle 8-bit Music Box BGM">
+        ♪ BGM: OFF
+      </button>
+      <button id="sfx-toggle-btn" class="pixel-btn pixel-btn-xs taskbar-tool" type="button" title="Toggle Sound Effects">
+        🔊 SFX
+      </button>
+      <div id="taskbar-clock" class="taskbar-clock" aria-label="Current time">12:00 PM</div>
+    </div>
+  </footer>
+
+  <!-- Secret Confession Sanctuary Overlay (Unlocked by solving the 4-clue puzzle!) -->
+  <div id="confession-overlay" class="confession-overlay hidden" role="dialog" aria-modal="true" aria-label="Secret Confession for Zhia">
+    <canvas id="celebration-canvas" class="celebration-canvas" aria-hidden="true"></canvas>
+
+    <div class="confession-stage">
+      <!-- Step 1: Animated Sealed Pixel Envelope -->
+      <div id="envelope-scene" class="envelope-scene pixel-box">
+        <div class="sanctuary-badge" id="sanctuary-badge">SECRET UNLOCKED // FOR ZHIA ONLY</div>
+        <h2 class="envelope-heading">You unlocked the secret place!</h2>
+        <div id="pixel-envelope" class="pixel-envelope" role="button" tabindex="0" aria-label="Open confession letter">
+          <div class="envelope-flap"></div>
+          <div class="envelope-body">
+            <div class="envelope-seal">♥</div>
+          </div>
+        </div>
+        <p class="envelope-prompt">Click the heart seal to open your letter, Zhia ✨</p>
+      </div>
+
+      <!-- Step 2: Opened Confession Letter -->
+      <article id="letter-scene" class="letter-scene pixel-box hidden">
+        <div class="letter-topbar">
+          <span>💌 FOR_ZHIA_CONFESSION.TXT</span>
+          <button id="close-confession-btn" class="pixel-btn pixel-btn-xs" type="button">✕ Back to OS</button>
+        </div>
+        <div class="letter-paper">
+          <div class="letter-sparkles" aria-hidden="true">✦ ♥ ✦</div>
+          <h2 id="letter-heading" class="letter-heading">Dear Zhia,</h2>
+          <div id="letter-body" class="letter-body"></div>
+          <div class="letter-footer">
+            <p id="letter-signoff" class="letter-signoff"></p>
+            <p id="letter-signature" class="letter-signature"></p>
+          </div>
+          <div class="letter-actions">
+            <button id="send-heart-btn" class="pixel-btn pixel-btn-primary" type="button">
+              ♥ Send a Heart Back ♥
+            </button>
+            <button id="replay-confetti-btn" class="pixel-btn" type="button">
+              ✨ More Sparkles
+            </button>
+          </div>
+          <p id="heart-response-msg" class="heart-response-msg hidden"></p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="audio.js"></script>
+  <script src="pets.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
