@@ -218,7 +218,8 @@
       "Welcome to this cozy pink pixel workspace! Explore the apps, pet the little friends below, and collect 4 secret clues~",
       "Secret tip #1: Try pulling 3 capsules in Quote Jar, and don't forget to switch on the Pink UV Lamp inside Secret Diary!",
       "Secret tip #2: Mochi & Boba love treats! Click them or drop a strawberry from the taskbar to see what they're hiding 🐾",
-      "P.S. Every pixel in this little world was built just to make you smile ♥"
+      "P.S. Every pixel in this little world was built just to make you smile ♥",
+      "Psst: this world is HUGE! Drag the map or use the World Map (bottom-left) to visit the Garden, Candle Cove, Arcade, Café & Star Deck. Mini games hide everywhere 🗺️"
     ];
 
     const flipSticky = () => {
@@ -308,6 +309,8 @@
     clues: { title: "🔎 Clue_Log.log", width: 460, x: 240, y: 58 },
     vault: { title: "🔒 Secret_Vault.exe", width: 440, x: 260, y: 74 }
   };
+
+  Object.assign(APP_META, window.GAME_META || {});
 
   function openApp(appId) {
     closeStartMenu();
@@ -471,6 +474,8 @@
       case "vault":
         renderVaultApp(container);
         break;
+      default:
+        if (window.GAMES && window.GAMES[appId]) window.GAMES[appId](container);
     }
   }
 
@@ -1102,6 +1107,7 @@
   // 9. Initialize Everything!
   // ============================================================
   function init() {
+    window.PinkOS = { toast: showToast };
     initBootScreen();
     initBackgroundCanvas();
     initDesktopWidgets();

@@ -166,8 +166,9 @@ class PixelPetsManager {
   }
 
   dropTreat(emoji = "🍓") {
-    const maxWidth = Math.max(260, window.innerWidth - 160);
-    const treatX = Math.floor(90 + Math.random() * (maxWidth - 90));
+    const camX = window.WORLD ? window.WORLD.cam.x : 0;
+    const layerW = this.layerEl.clientWidth || window.innerWidth;
+    const treatX = Math.max(100, Math.min(layerW - 160, Math.floor(camX + 120 + Math.random() * Math.max(200, window.innerWidth - 480))));
 
     if (this.treatTarget && this.treatTarget.el) {
       this.treatTarget.el.remove();
@@ -211,7 +212,7 @@ class PixelPetsManager {
   startLoop() {
     const tick = () => {
       const minX = 85;
-      const maxX = Math.max(260, window.innerWidth - 155);
+      const maxX = Math.max(260, (this.layerEl.clientWidth || window.innerWidth) - 155);
 
       this.pets.forEach((pet) => {
         if (this.treatTarget) {

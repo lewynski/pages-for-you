@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="world.css" />
 </head>
 <body class="theme-sakura">
   <!-- Boot Splash Screen -->
@@ -31,38 +32,8 @@
 
   <!-- Main Pixel Desktop Workspace -->
   <main id="desktop" class="desktop" aria-label="Pixel Pink Workspace">
-    <!-- Left Column: Desktop App Icons -->
-    <nav class="desktop-icons" aria-label="Workspace Applications">
-      <button class="desktop-icon" data-app="quotes" type="button">
-        <span class="icon-art icon-quotes" aria-hidden="true"></span>
-        <span class="icon-label">Quote Jar</span>
-      </button>
-
-      <button class="desktop-icon" data-app="pets" type="button">
-        <span class="icon-art icon-pets" aria-hidden="true"></span>
-        <span class="icon-label">Pet Corner</span>
-      </button>
-
-      <button class="desktop-icon" data-app="diary" type="button">
-        <span class="icon-art icon-diary" aria-hidden="true"></span>
-        <span class="icon-label">Secret Diary</span>
-      </button>
-
-      <button class="desktop-icon" data-app="melody" type="button">
-        <span class="icon-art icon-melody" aria-hidden="true"></span>
-        <span class="icon-label">Melody Box</span>
-      </button>
-
-      <button class="desktop-icon" data-app="clues" type="button">
-        <span class="icon-art icon-clues" aria-hidden="true"></span>
-        <span class="icon-label">Clue Log</span>
-      </button>
-
-      <button class="desktop-icon desktop-icon-secret" data-app="vault" type="button" id="vault-desktop-icon">
-        <span class="icon-art icon-vault" aria-hidden="true"></span>
-        <span class="icon-label">Secret Vault 🔒</span>
-      </button>
-    </nav>
+    <!-- World viewport (huge explorable map) -->
+    <div id="world-viewport" class="world-viewport"><div id="world" class="world"><canvas id="world-canvas" class="world-canvas"></canvas></div></div>
 
     <!-- Right Column: Cozy Desktop Widgets -->
     <aside class="desktop-widgets" aria-label="Desktop Widgets">
@@ -161,6 +132,7 @@
       <button id="sfx-toggle-btn" class="pixel-btn pixel-btn-xs taskbar-tool" type="button" title="Toggle Sound Effects">
         🔊 SFX
       </button>
+      <div id="love-points" class="taskbar-clock taskbar-love" title="Love Points from mini games">♥ 0</div>
       <div id="taskbar-clock" class="taskbar-clock" aria-label="Current time">12:00 PM</div>
     </div>
   </footer>
@@ -223,6 +195,8 @@
   <!-- Scripts -->
   <script src="config.js"></script>
   <script src="audio.js"></script>
+  <script src="world.js"></script>
+  <script src="games.js"></script>
   <script src="pets.js"></script>
   <script src="app.js"></script>
 </body>
