@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZHIA.OS ♥ Pages For You</title>
+  <title>PINK.OS ♥ Pages For You</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
@@ -11,10 +11,10 @@
 </head>
 <body class="theme-sakura">
   <!-- Boot Splash Screen -->
-  <div id="boot-screen" class="boot-screen" role="dialog" aria-label="Booting ZHIA.OS">
+  <div id="boot-screen" class="boot-screen" role="dialog" aria-label="Booting PINK.OS">
     <div class="boot-card pixel-box">
       <div class="boot-heart" aria-hidden="true">♥</div>
-      <h1 class="boot-title">ZHIA.OS</h1>
+      <h1 class="boot-title">PINK.OS</h1>
       <p class="boot-subtitle">pages-for-you // v1.4</p>
       <div class="boot-progress-track">
         <div id="boot-progress-bar" class="boot-progress-bar"></div>
@@ -60,7 +60,7 @@
 
       <button class="desktop-icon desktop-icon-secret" data-app="vault" type="button" id="vault-desktop-icon">
         <span class="icon-art icon-vault" aria-hidden="true"></span>
-        <span class="icon-label">For Zhia 🔒</span>
+        <span class="icon-label">Secret Vault 🔒</span>
       </button>
     </nav>
 
@@ -73,7 +73,7 @@
           <span id="widget-clue-count">0/4</span>
         </div>
         <div class="widget-body">
-          <p class="widget-text">Find all 4 hidden clues in this workspace to unlock <strong>For Zhia</strong>!</p>
+          <p class="widget-text">Find all 4 hidden clues in this workspace to unlock the <strong>Secret Vault</strong>!</p>
           <div class="seal-slots" id="widget-seal-slots">
             <div class="seal-slot" data-slot="1" title="Clue #1">?</div>
             <div class="seal-slot" data-slot="2" title="Clue #2">?</div>
@@ -89,9 +89,9 @@
       <!-- Sticky Note Widget -->
       <section class="widget sticky-note" id="sticky-note" tabindex="0" role="button" aria-label="Read sticky note">
         <div class="sticky-pin" aria-hidden="true">♥</div>
-        <p class="sticky-title">Note for Zhia:</p>
+        <p class="sticky-title">Note for You:</p>
         <p class="sticky-body" id="sticky-body">
-          Welcome to your cozy pink pixel workspace! Explore the apps, pet the little friends below, and collect 4 secret clues~
+          Welcome to this cozy pink pixel workspace! Explore the apps, pet the little friends below, and collect 4 secret clues~
         </p>
         <span class="sticky-hint">click to flip note ↻</span>
       </section>
@@ -122,7 +122,7 @@
 
   <!-- Start Menu Popup -->
   <div id="start-menu" class="start-menu pixel-box hidden" role="menu">
-    <div class="start-menu-header">♥ ZHIA.OS MENU</div>
+    <div class="start-menu-header">♥ PINK.OS MENU</div>
     <div class="start-menu-section">
       <div class="start-menu-label">Apps</div>
       <button class="start-item" data-app="quotes" type="button">🎀 Quote Jar</button>
@@ -130,7 +130,7 @@
       <button class="start-item" data-app="diary" type="button">📖 Secret Diary</button>
       <button class="start-item" data-app="melody" type="button">🎵 Melody Box</button>
       <button class="start-item" data-app="clues" type="button">🔎 Clue Log</button>
-      <button class="start-item start-item-secret" data-app="vault" type="button">🔒 For Zhia</button>
+      <button class="start-item start-item-secret" data-app="vault" type="button">🔒 Secret Vault</button>
     </div>
     <div class="start-menu-section">
       <div class="start-menu-label">Pink Theme</div>
@@ -166,33 +166,42 @@
   </footer>
 
   <!-- Secret Confession Sanctuary Overlay (Unlocked by solving the 4-clue puzzle!) -->
-  <div id="confession-overlay" class="confession-overlay hidden" role="dialog" aria-modal="true" aria-label="Secret Confession for Zhia">
+  <div id="confession-overlay" class="confession-overlay hidden" role="dialog" aria-modal="true" aria-label="Secret Unlocked">
     <canvas id="celebration-canvas" class="celebration-canvas" aria-hidden="true"></canvas>
 
     <div class="confession-stage">
       <!-- Step 1: Animated Sealed Pixel Envelope -->
       <div id="envelope-scene" class="envelope-scene pixel-box">
-        <div class="sanctuary-badge" id="sanctuary-badge">SECRET UNLOCKED // FOR ZHIA ONLY</div>
+        <div class="sanctuary-badge" id="sanctuary-badge">SECRET UNLOCKED ✨</div>
         <h2 class="envelope-heading">You unlocked the secret place!</h2>
-        <div id="pixel-envelope" class="pixel-envelope" role="button" tabindex="0" aria-label="Open confession letter">
+        <div id="pixel-envelope" class="pixel-envelope" role="button" tabindex="0" aria-label="Open secret message">
           <div class="envelope-flap"></div>
           <div class="envelope-body">
             <div class="envelope-seal">♥</div>
           </div>
         </div>
-        <p class="envelope-prompt">Click the heart seal to open your letter, Zhia ✨</p>
+        <p class="envelope-prompt">Click the heart seal to open your surprise ✨</p>
       </div>
 
-      <!-- Step 2: Opened Confession Letter -->
+      <!-- Step 2: Opened Confession Sanctuary -->
       <article id="letter-scene" class="letter-scene pixel-box hidden">
         <div class="letter-topbar">
-          <span>💌 FOR_ZHIA_CONFESSION.TXT</span>
+          <span>💌 SECRET_MESSAGE.TXT</span>
           <button id="close-confession-btn" class="pixel-btn pixel-btn-xs" type="button">✕ Back to OS</button>
         </div>
         <div class="letter-paper">
           <div class="letter-sparkles" aria-hidden="true">✦ ♥ ✦</div>
-          <h2 id="letter-heading" class="letter-heading">Dear Zhia,</h2>
-          <div id="letter-body" class="letter-body"></div>
+          <h2 id="letter-heading" class="letter-heading"></h2>
+
+          <!-- Embedded Message Card (Top) -->
+          <div class="embedded-message-card">
+            <div id="embedded-msg-title" class="embedded-msg-title"></div>
+            <div id="letter-body" class="letter-body"></div>
+          </div>
+
+          <!-- Highlighted Quote (Bottom) -->
+          <blockquote id="confession-bottom-quote" class="confession-bottom-quote"></blockquote>
+
           <div class="letter-footer">
             <p id="letter-signoff" class="letter-signoff"></p>
             <p id="letter-signature" class="letter-signature"></p>

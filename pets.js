@@ -78,22 +78,22 @@ const PET_SPRITES = {
 
 const PET_LINES = {
   mochi: [
-    "purr~ hi Zhia! ♥",
+    "purr~ hi there! ♥",
     "mrrrow~ you're so pretty!",
     "pet me more~ 🐾",
     "someone made this for you!",
     "meow! check the diary too~"
   ],
   boba: [
-    "*hop hop* hi Zhia!!",
+    "*hop hop* hi!! ♥",
     "got any strawberries? 🍓",
     "my ears perk up for you!",
-    "boba + Zhia = best day ♥",
+    "boba + you = best day ♥",
     "psst... a clue is nearby!"
   ],
   pudding: [
     "peep peep! ♥",
-    "cheering for you, Zhia!",
+    "cheering for you! ✨",
     "*happy wiggle* ✨",
     "you make the sun brighter!",
     "chirp! try the melody box~"
@@ -105,9 +105,9 @@ class PixelPetsManager {
     this.layerEl = layerEl;
     this.onPetMilestone = onPetMilestone;
     this.pets = [
-      { id: "mochi", name: "Mochi", role: "Sakura Cat", x: 140, dir: 1, speed: 0.55, state: "walk", timer: 140, hearts: 1 },
-      { id: "boba", name: "Boba", role: "Pink Bunny", x: 340, dir: -1, speed: 0.72, state: "idle", timer: 90, hearts: 1 },
-      { id: "pudding", name: "Pudding", role: "Pixel Chick", x: 520, dir: 1, speed: 0.48, state: "walk", timer: 110, hearts: 1 }
+      { id: "mochi", name: "Mochi", role: "Sakura Cat", x: 140, dir: 1, speed: 0.52, state: "walk", timer: 140, hearts: 1 },
+      { id: "boba", name: "Boba", role: "Pink Bunny", x: 420, dir: -1, speed: 0.68, state: "idle", timer: 90, hearts: 1 },
+      { id: "pudding", name: "Pudding", role: "Pixel Chick", x: 680, dir: 1, speed: 0.46, state: "walk", timer: 110, hearts: 1 }
     ];
     this.treatTarget = null;
     this.clueTriggered = false;
@@ -251,6 +251,16 @@ class PixelPetsManager {
               pet.dir = -1;
             }
           }
+
+          // Gentle spacing so pet nametags don't overlap when strolling
+          this.pets.forEach((other) => {
+            if (other.id === pet.id) return;
+            const dist = pet.x - other.x;
+            if (Math.abs(dist) < 76) {
+              pet.x += dist >= 0 ? 0.45 : -0.45;
+              pet.x = Math.max(minX, Math.min(maxX, pet.x));
+            }
+          });
         }
 
         pet.el.style.left = `${Math.round(pet.x)}px`;

@@ -1,9 +1,18 @@
 // ============================================================
-// ZHIA.OS // PAGES FOR YOU — Main Application & Puzzle Engine
+// PINK.OS // PAGES FOR YOU — Main Application & Puzzle Engine
 // ============================================================
 
 (() => {
   const CFG = window.PAGES_CONFIG;
+
+  // Decode hidden secret payload only at runtime
+  function getSecret() {
+    try {
+      return JSON.parse(atob(CFG._secretPayload));
+    } catch {
+      return { passcode: "", badge: "SECRET UNLOCKED ✨", heading: "Hey you," };
+    }
+  }
 
   // Global App State
   const state = {
@@ -46,8 +55,8 @@
     const steps = [
       { pct: 25, text: "Sprinkling pixel sakura petals..." },
       { pct: 55, text: "Waking up Mochi, Boba & Pudding..." },
-      { pct: 85, text: "Hiding 4 secret clues for Zhia..." },
-      { pct: 100, text: "Ready! Welcome to ZHIA.OS ♥" }
+      { pct: 85, text: "Hiding 4 secret clues in the workspace..." },
+      { pct: 100, text: "Ready! Welcome to PINK.OS ♥" }
     ];
 
     let idx = 0;
@@ -165,7 +174,7 @@
     const total = Object.values(state.cluesFound).filter(Boolean).length;
     if (total === 4) {
       setTimeout(() => {
-        showToast(`♥ All 4 clues found! Open "For Zhia 🔒" to unlock the secret!`);
+        showToast(`♥ All 4 clues found! Open "Secret Vault 🔒" to unlock the surprise!`);
       }, 1500);
     }
   }
@@ -206,10 +215,10 @@
     const stickyEl = document.getElementById("sticky-note");
     const stickyBody = document.getElementById("sticky-body");
     const stickyNotes = [
-      "Welcome to your cozy pink pixel workspace! Explore the apps, pet the little friends below, and collect 4 secret clues~",
+      "Welcome to this cozy pink pixel workspace! Explore the apps, pet the little friends below, and collect 4 secret clues~",
       "Secret tip #1: Try pulling 3 capsules in Quote Jar, and don't forget to switch on the Pink UV Lamp inside Secret Diary!",
       "Secret tip #2: Mochi & Boba love treats! Click them or drop a strawberry from the taskbar to see what they're hiding 🐾",
-      "P.S. Every pixel in this little world was built just to make you smile, Zhia ♥"
+      "P.S. Every pixel in this little world was built just to make you smile ♥"
     ];
 
     const flipSticky = () => {
@@ -258,7 +267,7 @@
       },
       {
         label: "MAX ✿",
-        quote: "Full Bloom! Just like how my day blooms whenever you say hi, Zhia ✿",
+        quote: "Full Bloom! Just like how my day blooms whenever I happen to see you ✿",
         svg: `<svg viewBox="0 0 16 16" width="52" height="52" shape-rendering="crispEdges">
           <rect x="5" y="10" width="6" height="5" fill="#d97aa6"/>
           <rect x="4" y="9" width="8" height="2" fill="#6b2649"/>
@@ -297,7 +306,7 @@
     diary: { title: "📖 Secret_Diary.txt", width: 480, x: 220, y: 48 },
     melody: { title: "🎵 Melody_Box.app", width: 500, x: 165, y: 84 },
     clues: { title: "🔎 Clue_Log.log", width: 460, x: 240, y: 58 },
-    vault: { title: "🔒 For_Zhia.exe", width: 440, x: 260, y: 74 }
+    vault: { title: "🔒 Secret_Vault.exe", width: 440, x: 260, y: 74 }
   };
 
   function openApp(appId) {
@@ -471,7 +480,7 @@
       <div class="gacha-stage">
         <div id="gacha-capsule" class="gacha-capsule">♥</div>
         <div id="quote-card" class="quote-card">
-          <span>Pull a pink capsule to reveal a secret quote made for Zhia ✨</span>
+          <span>Pull a pink capsule to reveal a secret quote ✨</span>
         </div>
         <button id="pull-quote-btn" class="pixel-btn pixel-btn-primary" type="button">
           🎀 Pull Secret Quote
@@ -595,17 +604,17 @@
     const pages = [
       {
         date: "PAGE 01 // NOTES ABOUT SOMEONE SPECIAL",
-        text: "I tried writing down all the reasons why you're so fun to be around, Zhia, but I ran out of pixels. Wait... there seems to be invisible ink written below this line. Try turning on the Pink UV Lamp!",
+        text: "I tried writing down all the reasons why seeing you around campus always brightens my day, but I ran out of pixels. Wait... there seems to be invisible ink written below this line. Try turning on the Pink UV Lamp!",
         secret: true
       },
       {
         date: "PAGE 02 // TINY CONFESSIONS",
-        text: "Sometimes I replay our conversations in my head just because they made me smile. Also, yes — I definitely spent way too much time picking the exact shade of pink for this workspace.",
+        text: "Sometimes I act totally chill when walking past, even though I immediately lose eye contact the second you look back. Also, yes — I definitely spent way too much time picking the exact shade of pink for this workspace.",
         secret: false
       },
       {
         date: "PAGE 03 // WISHLIST",
-        text: "1. Make Zhia smile today. 2. See if she finds all 4 clues. 3. Hope she likes the secret waiting inside For Zhia 🔒.",
+        text: "1. Make you smile today. 2. See if you find all 4 clues. 3. Hope you like the surprise waiting inside the Secret Vault 🔒.",
         secret: false
       }
     ];
@@ -632,7 +641,7 @@
                    <div style="font-family:var(--font-ui);font-size:10px;margin-bottom:4px;">★ INVISIBLE INK REVEALED (CLUE #3) ★</div>
                    <span class="clue-highlight-letter">${clue.letter}</span>${clue.quote.slice(1)}
                  </div>`
-              : `<div class="invisible-ink">✨ Hidden UV doodle: ♥ Zhia + Mochi + Boba ♥</div>`
+              : `<div class="invisible-ink">✨ Hidden UV doodle: ♥ Mochi + Boba + Pudding ♥</div>`
           }
         </div>
       `;
@@ -750,7 +759,7 @@
 
     container.innerHTML = `
       <p style="margin-bottom:12px;">
-        Collected <strong>${foundCount} / 4</strong> secret seals. Put the 4 letters together inside <strong>For Zhia 🔒</strong>!
+        Collected <strong>${foundCount} / 4</strong> secret seals. Put the 4 letters together inside <strong>Secret Vault 🔒</strong>!
       </p>
       <div class="clue-list">
         ${cluesArr
@@ -773,16 +782,16 @@
     `;
   }
 
-  // --- APP 6: Secret Vault (For Zhia 🔒) ---
+  // --- APP 6: Secret Vault 🔒 ---
   function renderVaultApp(container) {
     const allFound = Object.values(state.cluesFound).every(Boolean);
 
     container.innerHTML = `
       <div class="vault-box">
         <div id="vault-lock-icon" class="vault-lock-icon">${state.vaultUnlocked ? "💌" : "🔒"}</div>
-        <h3 class="vault-title">SECRET PLACE // FOR ZHIA</h3>
+        <h3 class="vault-title">SECRET VAULT // LOCKED</h3>
         <p class="vault-subtitle">
-          Enter the 4-letter secret code hidden across the workspace clues to open the confession!
+          Enter the 4-letter secret code hidden across the workspace clues to open the surprise!
         </p>
 
         <div class="vault-code-inputs" id="vault-code-inputs">
@@ -806,7 +815,7 @@
         ${
           state.vaultUnlocked
             ? `<div style="margin-top:12px;">
-                 <button id="vault-reopen-btn" class="pixel-btn pixel-btn-sm" type="button">💌 Re-open Confession Letter</button>
+                 <button id="vault-reopen-btn" class="pixel-btn pixel-btn-sm" type="button">💌 Re-open Secret Message</button>
                </div>`
             : ""
         }
@@ -816,8 +825,8 @@
     const inputs = Array.from(container.querySelectorAll(".vault-char-input"));
     const feedback = container.querySelector("#vault-feedback");
     const lockIcon = container.querySelector("#vault-lock-icon");
+    const secret = getSecret();
 
-    // Pre-fill letters for already discovered clues? Keep blank for puzzle fun, or let user type/click Fill Clues!
     inputs.forEach((inp, i) => {
       inp.addEventListener("input", () => {
         inp.value = inp.value.replace(/[^a-zA-Z]/g, "").toUpperCase();
@@ -838,7 +847,7 @@
     const autofillBtn = container.querySelector("#vault-autofill-btn");
     autofillBtn.addEventListener("click", () => {
       if (window.pixelAudio) window.pixelAudio.click();
-      const letters = CFG.passcode.split("");
+      const letters = secret.passcode.split("");
       inputs.forEach((inp, i) => {
         inp.value = letters[i] || "";
       });
@@ -847,17 +856,17 @@
 
     const attemptUnlock = () => {
       const code = inputs.map((inp) => inp.value.toUpperCase()).join("");
-      if (code === CFG.passcode.toUpperCase()) {
+      if (code === secret.passcode.toUpperCase()) {
         state.vaultUnlocked = true;
         if (window.pixelAudio) window.pixelAudio.unlockFanfare();
-        feedback.textContent = "★ ACCESS GRANTED! Opening your secret page, Zhia...";
+        feedback.textContent = "★ ACCESS GRANTED! Opening your secret page...";
         lockIcon.textContent = "💌";
 
         // Update desktop icon
         const vaultIcon = document.getElementById("vault-desktop-icon");
         if (vaultIcon) {
           vaultIcon.classList.add("unlocked");
-          vaultIcon.querySelector(".icon-label").textContent = "For Zhia 💌";
+          vaultIcon.querySelector(".icon-label").textContent = "Secret Vault 💌";
         }
 
         setTimeout(() => openConfessionSanctuary(), 550);
@@ -899,20 +908,18 @@
     const overlay = document.getElementById("confession-overlay");
     const envelopeScene = document.getElementById("envelope-scene");
     const letterScene = document.getElementById("letter-scene");
+    const secret = getSecret();
 
-    // Populate letter text from config
-    document.getElementById("sanctuary-badge").textContent = CFG.confession.badge;
-    document.getElementById("letter-heading").textContent = CFG.confession.heading;
+    // Populate secret confession ONLY once unlocked
+    document.getElementById("sanctuary-badge").textContent = secret.badge;
+    document.getElementById("letter-heading").textContent = secret.heading;
+    document.getElementById("embedded-msg-title").textContent = CFG.confession.embeddedTitle;
+    document.getElementById("confession-bottom-quote").textContent = CFG.confession.bottomQuote;
     document.getElementById("letter-signoff").textContent = CFG.confession.signoff;
     document.getElementById("letter-signature").textContent = CFG.confession.signature;
 
     const bodyEl = document.getElementById("letter-body");
-    bodyEl.innerHTML = CFG.confession.paragraphs
-      .map((p, idx) => {
-        const isHighlight = p.toLowerCase().includes("crush on you") || idx === 2;
-        return `<p class="${isHighlight ? "confession-highlight" : ""}">${p}</p>`;
-      })
-      .join("");
+    bodyEl.innerHTML = CFG.confession.embeddedParagraphs.map((p) => `<p>${p}</p>`).join("");
 
     envelopeScene.classList.remove("hidden");
     letterScene.classList.add("hidden");
@@ -997,7 +1004,7 @@
       spawnFireworkBurst(window.innerWidth * 0.5, window.innerHeight * 0.4, 55);
       spawnFireworkBurst(window.innerWidth * 0.25, window.innerHeight * 0.5, 30);
       spawnFireworkBurst(window.innerWidth * 0.75, window.innerHeight * 0.5, 30);
-      responseMsg.textContent = "♥ Heart received! You just made my entire week, Zhia! ♥";
+      responseMsg.textContent = "♥ Heart received! You just made my entire week! ♥";
       responseMsg.classList.remove("hidden");
     });
 

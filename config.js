@@ -1,25 +1,27 @@
 // ============================================================
-// PAGES FOR YOU — Easy Personalization Config
-// Edit anything below to customize quotes, clues, or the letter!
+// PAGES FOR YOU — Workspace Configuration
 // ============================================================
 
 window.PAGES_CONFIG = {
-  crushName: "Zhia",
-  osTitle: "ZHIA.OS",
-  passcode: "ZHIA", // 4-letter secret code unlocked by the 4 clues
+  osTitle: "PINK.OS",
 
-  // Secret Quotes shown in the Pink Capsule / Quotes App
+  // Encoded secret payload so casual repo visitors don't get spoiled!
+  // Decodes automatically inside the app once the puzzle is solved.
+  _secretPayload:
+    "eyJwYXNzY29kZSI6IlpISUEiLCJiYWRnZSI6IlNFQ1JFVCBVTkxPQ0tFRCAvLyBGT1IgWkhJQSIsImhlYWRpbmciOiJEZWFyIFpoaWEsIn0=",
+
+  // Secret Quotes shown in the Pink Capsule / Quotes App (spoiler-free!)
   secretQuotes: [
     "Some people feel like sunshine even on rainy days.",
     "You have no idea how much a single smile from you changes my whole mood.",
     "Every time my phone lights up, I secretly hope it's you.",
-    "If I could bookmark a feeling, it would be every moment I talk to you.",
+    "If I could bookmark a feeling, it would be every moment I see you smile.",
     "You make ordinary afternoons feel like cherry blossom season.",
     "Out of all the pages I could ever build, my favorite one is about you.",
     "Notice how the little pixel pets get happier when you're here? Same.",
     "I'm not great at saying things out loud, so I hid them in pixels instead.",
-    "Little reminder: you are effortlessly wonderful, Zhia.",
-    "My favorite notification will always be your name."
+    "Little reminder: you are effortlessly wonderful.",
+    "Sometimes admiring someone quietly from afar is the sweetest part of the day."
   ],
 
   // The 4 Puzzle Clues (each unlocks one seal of the Secret Vault)
@@ -29,9 +31,9 @@ window.PAGES_CONFIG = {
       letter: "Z",
       slot: 1,
       title: "Sakura Seal",
-      source: "Quote Capsule",
-      hint: "Pull 3 capsules in the Secret Quotes app until the Golden Capsule appears.",
-      quote: "Zero chance I don't smile whenever your name pops up on my screen."
+      source: "Quote Jar",
+      hint: "Pull 3 capsules in the Quote Jar app until the Golden Capsule appears.",
+      quote: "Zero chance I don't smile whenever I happen to spot you across campus."
     },
     pets: {
       id: "pets",
@@ -39,8 +41,8 @@ window.PAGES_CONFIG = {
       slot: 2,
       title: "Pawprint Seal",
       source: "Desktop Pets",
-      hint: "Pet or feed Mochi the Cat or Boba the Bunny on the desktop until they're super happy!",
-      quote: "Heartbeats speed up a little whenever you're around."
+      hint: "Pet or feed Mochi, Boba, or Pudding on the desktop until they're super happy!",
+      quote: "Heartbeats speed up a little whenever you walk past."
     },
     diary: {
       id: "diary",
@@ -49,7 +51,7 @@ window.PAGES_CONFIG = {
       title: "Starlight Seal",
       source: "Secret Diary",
       hint: "Open Secret Diary and turn on the Pink UV Lamp to reveal the invisible ink.",
-      quote: "In a room full of stars, you're the only one I look for."
+      quote: "In a crowded hallway, you're still the only one I notice."
     },
     melody: {
       id: "melody",
@@ -58,21 +60,22 @@ window.PAGES_CONFIG = {
       title: "Moonbeam Seal",
       source: "Melody Box",
       hint: "Open Melody Box and play the 4 glowing pink piano notes in order.",
-      quote: "Always you. Even when I try to act cool about it."
+      quote: "Always acting cool when you're near, even though I fold instantly."
     }
   },
 
-  // Final Secret Confession Letter (shown once the puzzle is solved!)
+  // Final Secret Confession (shown ONLY after solving the puzzle!)
   confession: {
-    badge: "SECRET UNLOCKED // FOR ZHIA ONLY",
-    heading: "Dear Zhia,",
-    paragraphs: [
-      "You solved every little puzzle, petted the pixel friends, uncovered the hidden quotes, and opened the most secret corner of this workspace.",
-      "I made this little pink pixel world because I wanted to build something cute that might make you smile — and because there's something I've been wanting to tell you for a while.",
-      "I have a crush on you, Zhia.",
-      "I really admire the way you brighten up every moment just by being yourself. No pressure at all — I just didn't want to keep this a secret forever, and you deserve to know how special you are to me."
+    // Embedded message card (top section)
+    embeddedTitle: "💌 A Quiet Note From Afar",
+    embeddedParagraphs: [
+      "I've been admiring you quietly from afar for a while now. Every time our paths cross around campus, even just for a second, it somehow makes my whole day lighter.",
+      "Honestly, whenever you glance back my way, it's almost impossible to hold eye contact — I get shy and fold instantly (tiklop agad, no defense at all).",
+      "Since I can never seem to keep my composure in person, I built this little pink pixel workspace just to make you smile... and to finally let you know what I've been keeping to myself."
     ],
-    signoff: "Made with pixels & a very real crush,",
-    signature: "— Someone who really likes you ♥"
+    // Highlighted quote at the bottom
+    bottomQuote: "“The owner of this workspace has a crush on you.”",
+    signoff: "Still folding every time I see you on campus,",
+    signature: "— Someone secretly rooting for you ♥"
   }
 };

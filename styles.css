@@ -1,5 +1,5 @@
 /* ============================================================
-   ZHIA.OS // PAGES FOR YOU — Pixel Pink Desktop Stylesheet
+   PINK.OS // PAGES FOR YOU — Pixel Pink Desktop Stylesheet
    ============================================================ */
 
 :root {
@@ -947,7 +947,7 @@ body.theme-night .desktop-icon:hover {
   line-height: 1.15;
 }
 
-/* 6. Secret Vault App (For Zhia 🔒) */
+/* 6. Secret Vault App (🔒) */
 .vault-box {
   text-align: center;
   padding: 12px 10px;
@@ -1477,17 +1477,41 @@ body.theme-night .desktop-icon:hover {
   margin-bottom: 10px;
 }
 
-.letter-body p.confession-highlight {
-  font-family: var(--font-pixel);
-  font-size: 13px;
-  line-height: 1.7;
-  color: #ffffff;
-  background: var(--accent);
+.letter-body p:last-child {
+  margin-bottom: 0;
+}
+
+.embedded-message-card {
+  background: #ffffff;
   border: 3px solid var(--border-dark);
+  border-left: 7px solid var(--accent);
   box-shadow: 4px 4px 0 var(--shadow-pixel);
-  padding: 12px 14px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.embedded-msg-title {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed var(--surface-deep);
+}
+
+.confession-bottom-quote {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  line-height: 1.75;
+  color: #ffffff;
+  background: linear-gradient(90deg, var(--accent), #ff6ea8);
+  border: 3px solid var(--border-dark);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.35),
+    4px 4px 0 var(--shadow-pixel);
+  padding: 14px 16px;
   text-align: center;
-  margin: 18px 0;
+  margin: 14px 0 16px;
 }
 
 .letter-footer {
